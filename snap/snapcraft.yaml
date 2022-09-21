@@ -12,7 +12,7 @@ grade: stable
 confinement: strict
 
 parts:
-  hello:
+  greetings:
     plugin: rust
     build-packages: [rustc, cargo]
 
