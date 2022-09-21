@@ -36,8 +36,7 @@ parts:
     #   has to be overridden (feature `A` in this case).
     rust-features: [B]
 
-    source-type: local
-    source: greetings
+    source: ./greetings
 
 apps:
   rusty-hello:
