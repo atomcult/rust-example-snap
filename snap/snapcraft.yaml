@@ -1,0 +1,46 @@
+name: rusty-hello
+base: core22
+version: '0.1'
+summary: Rust example in Snap
+description: |
+  This is my-snap's description. You have a paragraph or two to tell the
+  most important story about your snap. Keep it under 100 words though,
+  we live in tweetspace and your description wants to look good in the snap
+  store.
+
+grade: stable
+confinement: strict
+
+parts:
+  hello:
+    plugin: rust
+    build-packages: [rustc, cargo]
+
+    # Snapcraft will build all of the constituent crates of given workspace
+    #   but only the binaries listed in `rust-path` will be copied to the
+    #   stage directory. Alternatively, if `rust-path` is omitted, all
+    #   binaries from the workspace will be staged.
+    # FIXME: Currently, only the first item in the array is used.
+    #   Presumably, the point of it being an array is that it can use multiple
+    #   binaries from a workspace.
+    # FIXME: Currently, snapcraft builds all crates in the workspace, but
+    #   they could be built selectively
+    rust-path: [hello]
+
+    # `rust-features` enables optional features in addition to the
+    #   default feature set enabled in the crate. If the feature doesn't
+    #   exist on a given crate (like, for example, when you are compiling
+    #   multiple crates in a workspace), then it is silently ignored. This
+    #   can also be a gotcha if two crates have features with the same name,
+    #   but only one is desired. To disable default features, the build stage
+    #   has to be overridden (feature `A` in this case).
+    rust-features: [B]
+
+    source-type: local
+    source: greetings
+
+apps:
+  rusty-hello:
+    command: bin/hello
+  # goodbye:
+  #   command: bin/goodbye
